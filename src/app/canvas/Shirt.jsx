@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import { easing } from 'maath'
 import { useSnapshot } from 'valtio'
