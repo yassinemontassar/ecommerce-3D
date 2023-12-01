@@ -5,17 +5,23 @@ import { useFrame } from '@react-three/fiber'
 import { Decal, useGLTF, useTexture } from '@react-three/drei'
 
 import state from '../store'
+import useColor from '../hooks/colors'
+
 const Shirt = () => {
   const snap = useSnapshot(state);
   const {nodes, materials} = useGLTF('/shirt_baked.glb');
 
   const logoTexture = useTexture(snap.logoDecal);
   const fullTextutre= useTexture(snap.fullDecal);
-
+  const {getColor} = useColor();
+  // snap.color = getColor();
+  const newSnap = { ...snap, color: getColor() };
+  console.log("Get color from localstorage: ",getColor())
+  console.log("New Snap Object: ", newSnap.color);
   useFrame((state, delta) => easing.dampC(materials.lambert1.color,
-    snap.color, 0.25, delta));
+    newSnap.color, 0.25, delta));
   
-    const stateString = JSON.stringify(snap);
+    const stateString = JSON.stringify(newSnap);
   return (
     <group
       key={stateString}
@@ -27,7 +33,7 @@ const Shirt = () => {
         material-roughness={1}
         dispose={null}
       >
-        {snap.isFullTexture && (
+        {newSnap.isFullTexture && (
           <Decal 
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
@@ -35,7 +41,7 @@ const Shirt = () => {
             map={fullTextutre}
           />
         )}
-        {snap.isLogoTexture && (
+        {newSnap.isLogoTexture && (
           <Decal 
             position={[0, 0.004, 0.15]}
             rotation={[0, 0, 0]}

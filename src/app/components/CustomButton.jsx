@@ -1,21 +1,26 @@
+"use client";
 import React from 'react'
 import state from '../store'
 import { useSnapshot } from 'valtio'
 import { getContrastingColor } from '../config/helpers'
+import useColor from '../hooks/colors'
 
 const CustomButton = ({type, title, customStyles, handleClick}) => {
+
     const generateStyle = (type) => {
         const snap = useSnapshot(state);
+        const {getColor} = useColor();
+        const newSnap = { ...snap, color: getColor() };
         if (type === 'filled') {
             return {
-                backgroundColor: snap.color,
-                color: getContrastingColor(snap.color)
+                backgroundColor: newSnap.color,
+                color: getContrastingColor(newSnap.color)
             }
         } else if (type === "outline") {
             return {
                 borderWidth: '1px',
-                borderColor: snap.color,
-                color: snap.color
+                borderColor: newSnap.color,
+                color: newSnap.color
             }
         }
     }
