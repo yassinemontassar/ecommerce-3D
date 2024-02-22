@@ -37,10 +37,8 @@ const Home = () => {
             className="flex flex-col gap-5"
             >
               <p className="max-w-md font-normal text-gray-600 text-base">
-                Create your unique and exclusive shirt with our brand-new 
-                3D customization tool. <strong>Unleash your
-                imagination</strong>{" "} 
-                and define your own style
+                Créez votre chemise unique et exclusive avec notre tout nouveau outil de personnalisation 3D. 
+                <strong> Laissez libre cours à votre imagination</strong>{" "} et définissez votre propre style.
               </p>
                 <motion.div
                  {...ButtonAnimation}
@@ -48,14 +46,14 @@ const Home = () => {
                 >
                   <CustomButton
                     type="filled"
-                    title="Customize It and Save It"
+                    title="Personnalisez-le et enregistrez-le"
                     handleClick={() => state.intro = false}
                     customStyles= "w-fit px-4 py-2.5 font-bold text-sm"
                   />
                      <CustomButton
                     type="filled"
-                    title="Check our store!"
-                    handleClick={() => (window.location.href = process.env.NEXT_PUBLIC_STORE_URL)}
+                    title="Notre Boutique"
+                    handleClick={() => (window.location.href = 'http://rounda.duckdns.org/')}
                     customStyles= "w-fit px-4 py-2.5 font-bold text-sm"
                   />
                   
